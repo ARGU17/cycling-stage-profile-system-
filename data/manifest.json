@@ -1,0 +1,148 @@
+{
+  "stages": [
+    {
+      "stageId": 1,
+      "slug": "stage-1",
+      "name": "Stage 1",
+      "distanceKm": 19.56,
+      "totalAscentM": 210,
+      "file": "stage-1.json"
+    },
+    {
+      "stageId": 2,
+      "slug": "stage-2",
+      "name": "Stage 2",
+      "distanceKm": 169.01,
+      "totalAscentM": 1969,
+      "file": "stage-2.json"
+    },
+    {
+      "stageId": 6,
+      "slug": "stage-6",
+      "name": "Stage 6",
+      "distanceKm": 186.21,
+      "totalAscentM": 4088,
+      "file": "stage-6.json"
+    },
+    {
+      "stageId": 7,
+      "slug": "stage-7",
+      "name": "Stage 7",
+      "distanceKm": 174.86,
+      "totalAscentM": 658,
+      "file": "stage-7.json"
+    },
+    {
+      "stageId": 8,
+      "slug": "stage-8",
+      "name": "Stage 8",
+      "distanceKm": 179.82,
+      "totalAscentM": 1276,
+      "file": "stage-8.json"
+    },
+    {
+      "stageId": 9,
+      "slug": "stage-9",
+      "name": "Stage 9",
+      "distanceKm": 185.61,
+      "totalAscentM": 3154,
+      "file": "stage-9.json"
+    },
+    {
+      "stageId": 10,
+      "slug": "stage-10",
+      "name": "Stage 10",
+      "distanceKm": 167.09,
+      "totalAscentM": 3713,
+      "file": "stage-10.json"
+    },
+    {
+      "stageId": 11,
+      "slug": "stage-11",
+      "name": "Stage 11",
+      "distanceKm": 161.34,
+      "totalAscentM": 1062,
+      "file": "stage-11.json"
+    },
+    {
+      "stageId": 12,
+      "slug": "stage-12",
+      "name": "Stage 12",
+      "distanceKm": 178.97,
+      "totalAscentM": 1361,
+      "file": "stage-12.json"
+    },
+    {
+      "stageId": 13,
+      "slug": "stage-13",
+      "name": "Stage 13",
+      "distanceKm": 205.98,
+      "totalAscentM": 2228,
+      "file": "stage-13.json"
+    },
+    {
+      "stageId": 14,
+      "slug": "stage-14",
+      "name": "Stage 14",
+      "distanceKm": 155.57,
+      "totalAscentM": 3864,
+      "file": "stage-14.json"
+    },
+    {
+      "stageId": 15,
+      "slug": "stage-15",
+      "name": "Stage 15",
+      "distanceKm": 183.96,
+      "totalAscentM": 3989,
+      "file": "stage-15.json"
+    },
+    {
+      "stageId": 16,
+      "slug": "stage-16",
+      "name": "Stage 16",
+      "distanceKm": 26.03,
+      "totalAscentM": 467,
+      "file": "stage-16.json"
+    },
+    {
+      "stageId": 17,
+      "slug": "stage-17",
+      "name": "Stage 17",
+      "distanceKm": 174.88,
+      "totalAscentM": 2287,
+      "file": "stage-17.json"
+    },
+    {
+      "stageId": 18,
+      "slug": "stage-18",
+      "name": "Stage 18",
+      "distanceKm": 185.35,
+      "totalAscentM": 3882,
+      "file": "stage-18.json"
+    },
+    {
+      "stageId": 19,
+      "slug": "stage-19",
+      "name": "Stage 19",
+      "distanceKm": 128.22,
+      "totalAscentM": 3498,
+      "file": "stage-19.json"
+    },
+    {
+      "stageId": 20,
+      "slug": "stage-20",
+      "name": "Stage 20",
+      "distanceKm": 171.92,
+      "totalAscentM": 5491,
+      "file": "stage-20.json"
+    },
+    {
+      "stageId": 21,
+      "slug": "stage-21",
+      "name": "Stage 21",
+      "distanceKm": 132.53,
+      "totalAscentM": 1121,
+      "file": "stage-21.json"
+    }
+  ]
+}
