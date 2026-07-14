@@ -26,3 +26,8 @@ Etapas 1, 2 y 6–21.
 ## GPX pendientes
 
 Etapas 3, 4 y 5.
+
+
+## v0.24+
+
+Hotfix de confirmación de convocatoria: exactamente 8 corredores avanzan correctamente en carrera única y temporada, incluso si el navegador bloquea `localStorage`.

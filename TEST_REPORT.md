@@ -54,3 +54,8 @@ Comprobación `node --check` superada:
 ## Compatibilidad
 
 Las carreras sin GPX siguen utilizando exactamente el motor y los perfiles anteriores.
+
+
+## Validación v0.24+
+
+Confirmadas carrera única, carrera GPX, temporada, selección manual de ocho corredores, almacenamiento bloqueado y simulación del primer sector GPX.

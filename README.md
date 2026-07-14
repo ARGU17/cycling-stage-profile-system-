@@ -1,4 +1,4 @@
-# Cycling Manager Tour v0.24 · Integración GPX real
+# Cycling Manager Tour v0.24+ · Integración GPX real
 
 Esta versión integra los recorridos GPX proporcionados dentro del simulador completo v0.24, conservando el motor de corredores, CP/W′, formaciones, ataques, grupos, nutrición, material, IA rival, telemetría, contratos, staff y temporada.
 
@@ -121,11 +121,13 @@ gpx-engine.js
 game.js
 v024-expansion.js
 gpx-integration.js
+v024-plus-fix.js
 ```
 
 - `gpx-stage-data.js` contiene los datos procesados.
 - `gpx-engine.js` modifica las etapas antes de iniciar el juego.
 - `gpx-integration.js` conecta el GPX con la física y la interfaz después de cargar v0.24.
+- `v024-plus-fix.js` corrige la confirmación de ocho corredores y protege el flujo frente a fallos de almacenamiento.
 
 ## Archivos nuevos
 
@@ -134,6 +136,7 @@ gpx-stage-data.js
 gpx-engine.js
 gpx-integration.js
 gpx.css
+v024-plus-fix.js
 gpx/
 tools/build_stage_data.py
 tools/rebuild_gpx_data.py
@@ -174,3 +177,8 @@ Para una primera prueba de esta integración, se recomienda pulsar **Borrar guar
 - No se han añadido carreteras, poblaciones ni cartografía base.
 - Los puntos de sprint, puertos oficiales y nombres geográficos no vienen identificados en los GPX suministrados; las ascensiones y sectores se detectan automáticamente.
 - Las etapas 3, 4 y 5 necesitan sus GPX para completar el Tour real de 21 etapas.
+
+
+## Hotfix v0.24+
+
+La confirmación de los ocho corredores es transaccional y no depende de que `localStorage` funcione. Carrera única y temporada avanzan a la pantalla de carrera incluso cuando el navegador bloquea el almacenamiento local.
