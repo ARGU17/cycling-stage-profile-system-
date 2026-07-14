@@ -1,0 +1,678 @@
+/* ============================================================
+   CYCLING MANAGER TOUR v0.24
+   v024.css
+   Capa visual adicional. Se carga después de styles.css.
+   ============================================================ */
+
+:root {
+  --violet: #a78bfa;
+  --teal: #2dd4bf;
+  --cyan: #22d3ee;
+}
+
+.section-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.manager-card,
+.contract-card,
+.scouting-card,
+.mentorship-card,
+.technical-card,
+.record-card,
+.planning-main,
+.advanced-tactics,
+.narration-box,
+.alert-feed {
+  background: linear-gradient(180deg, rgba(38,50,68,.98), rgba(15,23,42,.98));
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 14px;
+}
+
+.manager-card,
+.contract-card,
+.scouting-card,
+.mentorship-card,
+.technical-card {
+  display: grid;
+  gap: 9px;
+}
+
+.manager-card label,
+.contract-card label,
+.technical-card label,
+.mentorship-card label,
+.planning-main label {
+  display: grid;
+  gap: 5px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+/* Planificación anual */
+.planning-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 14px;
+}
+
+.planning-rider-list {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  max-height: 960px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.planning-rider {
+  display: grid;
+  gap: 3px;
+  text-align: left;
+  background: rgba(15,23,42,.58);
+  color: var(--text);
+  border: 1px solid var(--border);
+  box-shadow: none;
+}
+
+.planning-rider span {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.planning-rider.active {
+  border-color: rgba(34,197,94,.72);
+  background: rgba(34,197,94,.13);
+}
+
+.planning-main {
+  display: grid;
+  gap: 14px;
+}
+
+.target-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.race-check-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+  max-height: 620px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.race-check {
+  display: grid !important;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 7px !important;
+  padding: 9px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(15,23,42,.48);
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+.race-check span {
+  display: grid;
+  gap: 2px;
+  color: #e5e7eb;
+  font-size: 11px;
+}
+
+.race-check b {
+  color: var(--blue);
+  font-size: 10px;
+}
+
+.race-check.selected {
+  border-color: rgba(34,197,94,.45);
+  background: rgba(34,197,94,.10);
+}
+
+.peak-chart {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: rgba(15,23,42,.55);
+  overflow: hidden;
+}
+
+.peak-chart svg {
+  width: 100%;
+  min-height: 140px;
+  display: block;
+}
+
+.peak-marker {
+  stroke-width: 2;
+  stroke-dasharray: 4 4;
+}
+.peak-a { stroke: #ef4444; }
+.peak-b { stroke: #f59e0b; }
+.peak-c { stroke: #38bdf8; }
+
+/* Contratos y cantera */
+.manager-tabs,
+.camera-buttons {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.manager-tabs button.active,
+.camera-buttons button.active {
+  color: #052e16;
+  background: linear-gradient(180deg, #34d399, var(--green));
+}
+
+.contract-grid,
+.scouting-mission-grid,
+.mentorship-grid,
+.technical-grid,
+.operations-grid,
+.advanced-control-grid,
+.record-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.contract-card.good { border-color: rgba(34,197,94,.44); }
+.contract-card.warn { border-color: rgba(245,158,11,.52); }
+.contract-card.bad { border-color: rgba(239,68,68,.55); }
+
+.promise-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 5px;
+}
+
+.promise-list label {
+  display: flex !important;
+  align-items: center;
+  gap: 6px !important;
+  padding: 7px;
+  border-radius: 10px;
+  background: rgba(15,23,42,.45);
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+.contract-money {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.scouting-card.active {
+  border-color: rgba(56,189,248,.58);
+  background: linear-gradient(180deg, rgba(56,189,248,.12), rgba(15,23,42,.98));
+}
+
+/* Staff y logística */
+.logistics-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.logistics-summary div {
+  display: grid;
+  gap: 3px;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(148,163,184,.18);
+  background: rgba(15,23,42,.48);
+}
+
+.logistics-summary span {
+  color: var(--muted);
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+/* Material técnico */
+.technical-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* Táctica avanzada */
+.advanced-tactics {
+  margin-top: 16px;
+  border-color: rgba(167,139,250,.34);
+}
+
+.attack-buttons {
+  display: grid;
+  gap: 7px;
+  margin: 12px 0;
+}
+
+.attack-row {
+  display: grid;
+  grid-template-columns: minmax(140px, 1fr) 90px minmax(150px, .8fr) auto;
+  align-items: center;
+  gap: 7px;
+  padding: 8px;
+  border: 1px solid rgba(148,163,184,.16);
+  border-radius: 12px;
+  background: rgba(15,23,42,.45);
+}
+
+.attack-row span {
+  color: var(--violet);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.formation-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.formation-grid label {
+  display: grid;
+  gap: 4px;
+  padding: 8px;
+  border-radius: 12px;
+  background: rgba(15,23,42,.42);
+  border: 1px solid rgba(148,163,184,.16);
+}
+
+/* Fisiología */
+.physiology-preview {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.physiology-preview div {
+  display: grid;
+  gap: 3px;
+  padding: 11px;
+  border-radius: 13px;
+  border: 1px solid rgba(167,139,250,.26);
+  background: rgba(76,29,149,.13);
+}
+
+.physiology-preview span {
+  color: var(--muted);
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.physio-bars {
+  display: grid;
+  gap: 5px;
+}
+
+.physio-bars > span {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.mini-bar {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(15,23,42,.8);
+  border: 1px solid var(--border);
+}
+
+.mini-bar div {
+  height: 100%;
+  background: linear-gradient(90deg, #a78bfa, #38bdf8);
+}
+
+/* Perfil v0.24 */
+.v024-profile .profile-svg svg {
+  min-height: 340px;
+}
+
+.g-extreme {
+  fill: #991b1b;
+  background: #991b1b;
+}
+
+.pave-band {
+  fill: #d6d3d1;
+  stroke: #78716c;
+  stroke-width: 1;
+  opacity: .92;
+}
+
+.pave-band.severity-4,
+.pave-band.severity-5 {
+  fill: #a8a29e;
+}
+
+.pave-key {
+  display: inline-block;
+  width: 16px;
+  height: 12px;
+  border-radius: 3px;
+  background: repeating-linear-gradient(45deg, #d6d3d1 0 3px, #78716c 3px 5px);
+}
+
+.group-marker-line {
+  stroke: rgba(255,255,255,.16);
+  stroke-dasharray: 3 5;
+}
+
+/* TV avanzada */
+.tv-studio {
+  background:
+    radial-gradient(circle at 15% 5%, rgba(34,211,238,.16), transparent 28%),
+    radial-gradient(circle at 90% 10%, rgba(167,139,250,.13), transparent 30%),
+    linear-gradient(180deg, rgba(15,23,42,.99), rgba(2,6,23,.99));
+}
+
+.tv-topbar {
+  display: grid;
+  grid-template-columns: auto minmax(220px, 1fr) repeat(4, auto);
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px 13px;
+  border-radius: 999px;
+  background: rgba(2,6,23,.8);
+  border: 1px solid rgba(56,189,248,.34);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.tv-main-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(320px, .6fr);
+  gap: 12px;
+}
+
+.narration-box,
+.alert-feed {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.narration-box p {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 8px;
+  margin: 0;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(148,163,184,.14);
+  line-height: 1.45;
+}
+
+.narration-box p b {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(56,189,248,.16);
+  color: #bae6fd;
+}
+
+.live-alert {
+  display: grid;
+  grid-template-columns: 55px 1fr;
+  gap: 8px;
+  padding: 8px;
+  margin-bottom: 6px;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  background: rgba(15,23,42,.54);
+}
+
+.live-alert span {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.live-alert p {
+  margin: 0;
+  font-size: 12px;
+}
+
+.live-alert.danger { border-color: rgba(239,68,68,.55); background: rgba(239,68,68,.10); }
+.live-alert.warning { border-color: rgba(245,158,11,.48); background: rgba(245,158,11,.09); }
+.live-alert.info { border-color: rgba(56,189,248,.43); }
+
+.timeline-ribbon {
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  padding: 9px 0 2px;
+}
+
+.timeline-ribbon span {
+  min-width: 260px;
+  padding: 8px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(15,23,42,.65);
+  font-size: 11px;
+}
+
+.timeline-ribbon b {
+  margin-right: 6px;
+  color: var(--blue);
+}
+
+/* Alertas */
+.alert-settings {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.alert-setting {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 8px;
+  padding: 11px;
+  border-radius: 13px;
+  border: 1px solid var(--border);
+  background: rgba(15,23,42,.48);
+}
+
+.alert-setting span {
+  display: grid;
+  gap: 3px;
+}
+
+.alert-setting small {
+  color: var(--muted);
+}
+
+.alert-setting.danger { border-left: 4px solid #ef4444; }
+.alert-setting.warning { border-left: 4px solid #f59e0b; }
+.alert-setting.info { border-left: 4px solid #38bdf8; }
+
+/* Telemetría y gráficos */
+.chart-grid-v024 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.analysis-chart {
+  padding: 11px;
+  border-radius: 14px;
+  background: rgba(15,23,42,.55);
+  border: 1px solid var(--border);
+}
+
+.analysis-chart.wide {
+  margin-top: 12px;
+}
+
+.analysis-chart svg {
+  width: 100%;
+  display: block;
+}
+
+.chart-grid {
+  stroke: rgba(148,163,184,.24);
+  stroke-width: 1;
+}
+
+.chart-line {
+  fill: none;
+  stroke: #22d3ee;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.chart-line.form { stroke: #22c55e; }
+.chart-line.fatigue { stroke: #ef4444; }
+
+.line-key {
+  display: inline-block;
+  width: 20px;
+  height: 3px;
+  margin: 0 6px 2px 10px;
+}
+.line-key.form { background: #22c55e; }
+.line-key.fatigue { background: #ef4444; }
+
+.timeline-list {
+  display: grid;
+  gap: 6px;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.timeline-event {
+  display: grid;
+  grid-template-columns: 65px 90px 1fr;
+  gap: 8px;
+  align-items: center;
+  padding: 8px;
+  border-radius: 11px;
+  background: rgba(15,23,42,.48);
+  border: 1px solid var(--border);
+}
+
+.timeline-event span {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 900;
+}
+.timeline-event p { margin: 0; }
+.timeline-event.danger { border-left: 4px solid #ef4444; }
+.timeline-event.warning { border-left: 4px solid #f59e0b; }
+.timeline-event.info { border-left: 4px solid #38bdf8; }
+
+/* Récords */
+.record-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.record-card {
+  display: grid;
+  gap: 5px;
+}
+
+.record-card span {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.record-card strong {
+  font-size: 18px;
+}
+
+.record-card small {
+  color: #cbd5e1;
+}
+
+@media (max-width: 1300px) {
+  .planning-layout,
+  .tv-main-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .planning-rider-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    max-height: 300px;
+  }
+
+  .technical-grid,
+  .record-grid,
+  .alert-settings {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tv-topbar {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 850px) {
+  .contract-grid,
+  .scouting-mission-grid,
+  .mentorship-grid,
+  .technical-grid,
+  .operations-grid,
+  .advanced-control-grid,
+  .record-grid,
+  .alert-settings,
+  .chart-grid-v024,
+  .target-grid,
+  .race-check-grid,
+  .formation-grid,
+  .promise-list,
+  .physiology-preview,
+  .logistics-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .planning-rider-list {
+    grid-template-columns: 1fr;
+  }
+
+  .attack-row {
+    grid-template-columns: 1fr;
+  }
+
+  .tv-topbar {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .timeline-event {
+    grid-template-columns: 55px 1fr;
+  }
+
+  .timeline-event p {
+    grid-column: 1 / -1;
+  }
+}

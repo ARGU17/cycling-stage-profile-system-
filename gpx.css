@@ -1,0 +1,191 @@
+/* ============================================================
+   GPX REAL PROFILE + ROUTE VISUALIZATION
+   ============================================================ */
+
+.gpx-stage-card {
+  overflow: visible;
+}
+
+.gpx-dashboard {
+  display: grid;
+  grid-template-columns: minmax(300px, .72fr) minmax(0, 1.45fr);
+  gap: 12px;
+}
+
+.gpx-map-panel,
+.gpx-profile-panel {
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid rgba(148,163,184,.2);
+  border-radius: 16px;
+  background: rgba(7,17,29,.72);
+}
+
+.gpx-panel-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+
+.gpx-panel-heading span {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.gpx-route-canvas,
+.gpx-profile-canvas {
+  display: block;
+  width: 100%;
+  border: 1px solid rgba(148,163,184,.18);
+  border-radius: 14px;
+  background: #081523;
+}
+
+.gpx-route-canvas {
+  height: 360px;
+  cursor: crosshair;
+}
+
+.gpx-profile-canvas {
+  height: 360px;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.gpx-profile-canvas:focus {
+  outline: 2px solid rgba(45,212,191,.65);
+  outline-offset: 2px;
+}
+
+.gpx-readout {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+  margin-bottom: 8px;
+}
+
+.gpx-readout div {
+  display: grid;
+  gap: 3px;
+  padding: 8px 10px;
+  border: 1px solid rgba(148,163,184,.16);
+  border-radius: 11px;
+  background: rgba(15,23,42,.7);
+}
+
+.gpx-readout span {
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.gpx-readout strong {
+  font-size: 16px;
+}
+
+.gpx-canvas-wrap {
+  position: relative;
+}
+
+.gpx-tooltip {
+  position: absolute;
+  display: none;
+  z-index: 12;
+  min-width: 112px;
+  padding: 7px 9px;
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 10px;
+  background: rgba(2,6,23,.94);
+  box-shadow: 0 10px 24px rgba(0,0,0,.34);
+  pointer-events: none;
+  transform: translateY(-100%);
+}
+
+.gpx-tooltip.visible {
+  display: grid;
+  gap: 2px;
+}
+
+.gpx-tooltip span {
+  font-size: 11px;
+  color: #dbeafe;
+}
+
+.gpx-scrubber {
+  width: 100%;
+  margin-top: 10px;
+  accent-color: #5d77ff;
+}
+
+.gpx-gradient-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 9px;
+}
+
+.gpx-gradient-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 7px;
+  border: 1px solid rgba(148,163,184,.14);
+  border-radius: 999px;
+  color: var(--muted);
+  background: rgba(15,23,42,.46);
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.gpx-gradient-legend i {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+
+.gpx-sector-grid {
+  margin-top: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-height: 290px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.gpx-home-badge {
+  justify-self: start;
+}
+
+@media (max-width: 1120px) {
+  .gpx-dashboard {
+    grid-template-columns: 1fr;
+  }
+  .gpx-route-canvas {
+    height: 300px;
+  }
+  .gpx-profile-canvas {
+    height: 330px;
+  }
+  .gpx-sector-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .gpx-readout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .gpx-route-canvas {
+    height: 250px;
+  }
+  .gpx-profile-canvas {
+    height: 285px;
+  }
+  .gpx-sector-grid {
+    grid-template-columns: 1fr;
+  }
+}

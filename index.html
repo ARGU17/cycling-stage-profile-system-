@@ -3,85 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cycling Stage Profiles</title>
-  <link rel="stylesheet" href="./styles.css" />
+  <meta name="theme-color" content="#0b1120" />
+  <title>Cycling Manager Tour v0.24 · GPX Real</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="v024.css" />
+  <link rel="stylesheet" href="gpx.css" />
 </head>
 <body>
-  <div class="app-shell">
-    <header class="topbar">
-      <div>
-        <p class="eyebrow">Cycling Manager · Stage Profile System</p>
-        <h1>Perfiles interactivos estilo Radial</h1>
-      </div>
-      <div class="topbar-controls">
-        <label class="field">
-          <span>Etapa</span>
-          <select id="stageSelect"></select>
-        </label>
-      </div>
-    </header>
+  <div id="app"></div>
 
-    <main class="layout">
-      <section class="panel panel-summary">
-        <div class="metrics-grid">
-          <article class="metric-card">
-            <span class="metric-label">Distancia</span>
-            <strong id="metricDistance">-</strong>
-          </article>
-          <article class="metric-card">
-            <span class="metric-label">Desnivel +</span>
-            <strong id="metricAscent">-</strong>
-          </article>
-          <article class="metric-card">
-            <span class="metric-label">Altitud</span>
-            <strong id="metricElevation">-</strong>
-          </article>
-          <article class="metric-card">
-            <span class="metric-label">Pendiente</span>
-            <strong id="metricGrade">-</strong>
-          </article>
-          <article class="metric-card">
-            <span class="metric-label">Km actual</span>
-            <strong id="metricKm">-</strong>
-          </article>
-          <article class="metric-card">
-            <span class="metric-label">Km a meta</span>
-            <strong id="metricToGo">-</strong>
-          </article>
-        </div>
-      </section>
+  <script src="data.js"></script>
+  <script src="v024-data.js"></script>
 
-      <section class="panel panel-map">
-        <div class="panel-head">
-          <div>
-            <p class="eyebrow">Recorrido</p>
-            <h2 id="routeTitle">Etapa</h2>
-          </div>
-          <div class="small-note" id="routeSummary"></div>
-        </div>
-        <canvas id="routeCanvas" width="900" height="420"></canvas>
-      </section>
+  <!-- GPX data and route/elevation engine must load before game.js -->
+  <script src="gpx-stage-data.js"></script>
+  <script src="gpx-engine.js"></script>
 
-      <section class="panel panel-profile">
-        <div class="panel-head">
-          <div>
-            <p class="eyebrow">Perfil</p>
-            <h2>Altimetría coloreada por pendiente</h2>
-          </div>
-          <div class="small-note">Pasa el ratón, arrastra o usa la rueda del ratón / dedo para recorrer el perfil.</div>
-        </div>
-        <div class="profile-wrap">
-          <canvas id="profileCanvas" width="1400" height="520"></canvas>
-          <div id="profileTooltip" class="tooltip hidden"></div>
-        </div>
-        <div class="scrubber-wrap">
-          <input id="distanceSlider" type="range" min="0" max="100" value="0" step="1" />
-        </div>
-        <div class="legend" id="gradeLegend"></div>
-      </section>
-    </main>
-  </div>
+  <script src="game.js"></script>
+  <script src="v024-expansion.js"></script>
 
-  <script type="module" src="./js/app.js"></script>
+  <!-- Runtime hooks: 250 m physics + interactive profile/route -->
+  <script src="gpx-integration.js"></script>
 </body>
 </html>
