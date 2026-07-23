@@ -1,0 +1,45 @@
+name: Validate Cycling Manager v0.26
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, master ]
+    paths:
+      - '*.js'
+      - '*.css'
+      - 'historical-data/**'
+      - 'tools/validate_wt_archive.py'
+      - 'tools/smoke_test_v026_full.js'
+      - '.github/workflows/build-historical-database.yml'
+  pull_request:
+    paths:
+      - '*.js'
+      - '*.css'
+      - 'historical-data/**'
+      - 'tools/validate_wt_archive.py'
+      - 'tools/smoke_test_v026_full.js'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate historical archive
+        run: python tools/validate_wt_archive.py
+      - name: Validate JavaScript syntax
+        run: |
+          for file in data.js v024-data.js game.js v024-expansion.js historical-manifest.js current-2026-major.js staff-database.js historical-engine.js staff-market-v026.js youth-market-v026.js v026-management.js v026-frontoffice.js; do
+            node --check "$file"
+          done
+      - name: Run v0.26 full smoke test
+        run: node tools/smoke_test_v026_full.js
