@@ -1,11 +1,53 @@
 /* ============================================================
    CYCLING MANAGER TOUR
    game.js
-   v0.24 integrated expansion
+   v0.24+ stability patch
    ============================================================ */
 
 const app = document.getElementById("app");
-const SAVE_KEY = "cyclingManager_v024";
+const SAVE_KEY = "cyclingManager_v024plus";
+
+const STORAGE_STATE = { available: true, lastError: null };
+
+function safeStorageGet(key) {
+  try {
+    const value = window.localStorage.getItem(key);
+    STORAGE_STATE.available = true;
+    STORAGE_STATE.lastError = null;
+    return value;
+  } catch (error) {
+    STORAGE_STATE.available = false;
+    STORAGE_STATE.lastError = error;
+    console.warn("Almacenamiento local no disponible:", error);
+    return null;
+  }
+}
+
+function safeStorageSet(key, value) {
+  try {
+    window.localStorage.setItem(key, value);
+    STORAGE_STATE.available = true;
+    STORAGE_STATE.lastError = null;
+    return true;
+  } catch (error) {
+    STORAGE_STATE.available = false;
+    STORAGE_STATE.lastError = error;
+    console.warn("No se pudo guardar la partida:", error);
+    return false;
+  }
+}
+
+function safeStorageRemove(key) {
+  try {
+    window.localStorage.removeItem(key);
+    return true;
+  } catch (error) {
+    STORAGE_STATE.available = false;
+    STORAGE_STATE.lastError = error;
+    console.warn("No se pudo borrar el guardado:", error);
+    return false;
+  }
+}
 
 const Game = {
   version: SAVE_VERSION,
@@ -139,16 +181,19 @@ function init() {
 }
 function saveGame(show = true) {
   Game.version = SAVE_VERSION;
-  localStorage.setItem(SAVE_KEY, JSON.stringify(Game));
-  if (show) toast("Partida guardada");
+  const saved = safeStorageSet(SAVE_KEY, JSON.stringify(Game));
+  if (show) {
+    toast(saved ? "Partida guardada" : "La partida continúa, pero el navegador bloquea el guardado local");
+  }
+  return saved;
 }
 function loadGame() {
-  const raw = localStorage.getItem(SAVE_KEY);
-  if (!raw) return toast("No hay guardado v0.24. Empieza una partida nueva.");
+  const raw = safeStorageGet(SAVE_KEY);
+  if (!raw) return toast(STORAGE_STATE.available ? "No hay guardado v0.24+. Empieza una partida nueva." : "El navegador bloquea el almacenamiento local. Puedes jugar, pero no cargar partidas.");
   try {
     const obj = JSON.parse(raw);
     if (obj.version !== SAVE_VERSION) {
-      localStorage.removeItem(SAVE_KEY);
+      safeStorageRemove(SAVE_KEY);
       toast("Guardado antiguo eliminado. Inicia una partida nueva.");
       return init();
     }
@@ -157,14 +202,15 @@ function loadGame() {
     sanitizeGameState();
     render();
   } catch (e) {
-    localStorage.removeItem(SAVE_KEY);
+    console.error(e);
+    safeStorageRemove(SAVE_KEY);
     toast("Guardado corrupto eliminado.");
     init();
   }
 }
 function clearSave() {
-  [SAVE_KEY,"cyclingManager_v013","cyclingManager_v012","cyclingManager_v011","cyclingManager_v10","cyclingManager_v09","cyclingManager_v08"].forEach(k => localStorage.removeItem(k));
-  toast("Guardados antiguos borrados");
+  [SAVE_KEY,"cyclingManager_v024","cyclingManager_v023","cyclingManager_v021","cyclingManager_v019","cyclingManager_v017","cyclingManager_v015","cyclingManager_v013","cyclingManager_v012","cyclingManager_v011","cyclingManager_v10","cyclingManager_v09","cyclingManager_v08"].forEach(safeStorageRemove);
+  toast(STORAGE_STATE.available ? "Guardados antiguos borrados" : "El navegador bloquea el almacenamiento local");
 }
 function sanitizeGameState() {
   Game.riders.forEach(r => {
@@ -194,7 +240,7 @@ function render() {
 function renderHome() {
   app.innerHTML = `
     <div class="header">
-      <div><h1>Cycling Manager Tour</h1><p>v0.24 · motor físico CP/W′ · grupos · manager avanzado · perfiles 1 km con microgradientes · gaps estabilizados</p></div>
+      <div><h1>Cycling Manager Tour</h1><p>v0.24+ · motor físico CP/W′ · grupos · manager avanzado · perfiles 1 km con microgradientes · gaps estabilizados</p></div>
       <div class="top-actions"><button class="secondary" onclick="loadGame()">Cargar</button><button class="danger" onclick="clearSave()">Borrar guardado</button></div>
     </div>
     <section class="panel"><h2>Modo de juego</h2><div class="mode-grid">
@@ -254,17 +300,40 @@ function autoSelectRoster(teamId, race) {
 }
 function toggleRoster(id) { if (Game.rosterLocked) return; if (Game.pendingRosterIds.includes(id)) Game.pendingRosterIds = Game.pendingRosterIds.filter(x => x !== id); else { if (Game.pendingRosterIds.length >= ROSTER_SIZE) return toast(`Máximo ${ROSTER_SIZE}`); Game.pendingRosterIds.push(id); } renderRosterSelection(); }
 function confirmRoster() {
-  if (Game.pendingRosterIds.length !== ROSTER_SIZE) return toast(`Debes escoger exactamente ${ROSTER_SIZE} corredores`);
-  Game.raceRosters = {};
-  TEAMS.forEach(team => { Game.raceRosters[team.id] = autoSelectRoster(team.id, getRace()).map(r => r.id); });
-  Game.raceRosters[Game.selectedTeamId] = [...Game.pendingRosterIds];
-  Game.lastRaceRosterIds = [...Game.pendingRosterIds];
-  resetRaceState(); Game.rosterLocked = true; saveGame(false); renderRace();
+  const uniqueIds = [...new Set((Game.pendingRosterIds || []).filter(id => !!getRider(id)))];
+  if (uniqueIds.length !== ROSTER_SIZE) {
+    Game.pendingRosterIds = uniqueIds;
+    renderRosterSelection();
+    return toast(`Debes escoger exactamente ${ROSTER_SIZE} corredores`);
+  }
+
+  try {
+    Game.pendingRosterIds = uniqueIds;
+    Game.raceRosters = {};
+    TEAMS.forEach(team => {
+      const selected = autoSelectRoster(team.id, getRace()).filter(Boolean).slice(0, ROSTER_SIZE);
+      Game.raceRosters[team.id] = selected.map(r => r.id);
+    });
+    Game.raceRosters[Game.selectedTeamId] = [...uniqueIds];
+    Game.lastRaceRosterIds = [...uniqueIds];
+
+    resetRaceState();
+    Game.rosterLocked = true;
+
+    // La transición de pantalla nunca depende de localStorage.
+    renderRace();
+    saveGame(false);
+  } catch (error) {
+    console.error("Error al confirmar la convocatoria:", error);
+    Game.rosterLocked = false;
+    toast("No se pudo iniciar la carrera. Se ha restaurado la selección para volver a intentarlo.");
+    renderRosterSelection();
+  }
 }
 function renderRosterSelection() {
   const team = getTeam(Game.selectedTeamId), race = getRace();
   const riders = getFullTeamRiders(Game.selectedTeamId).slice().sort((a,b) => b.base - a.base);
-  app.innerHTML = `<div class="header"><div><h1>Selecciona tus ${ROSTER_SIZE} corredores</h1><p>${esc(team.name)} · ${esc(race.name)} · la convocatoria queda bloqueada durante la carrera</p></div><div class="top-actions"><button class="secondary" onclick="Game.selectedTeamId=null;renderHome()">Volver</button><button onclick="confirmRoster()">Confirmar selección</button></div></div>
+  app.innerHTML = `<div class="header"><div><h1>Selecciona tus ${ROSTER_SIZE} corredores</h1><p>${esc(team.name)} · ${esc(race.name)} · la convocatoria queda bloqueada durante la carrera</p></div><div class="top-actions"><button class="secondary" onclick="Game.selectedTeamId=null;renderHome()">Volver</button><button id="confirm-roster-button" type="button" onclick="confirmRoster()">Confirmar selección e iniciar</button></div></div>
     <section class="panel sticky-panel"><div class="roster-summary"><div><strong>${Game.pendingRosterIds.length}/${ROSTER_SIZE} seleccionados</strong><p class="muted small">Elige bloque según perfil: GC, montaña, sprint, crono, pavé y gregarios.</p></div><div class="chip-row">${Game.pendingRosterIds.map(id => `<span class="chip selected">${esc(getRider(id).name)}</span>`).join("")}</div></div></section>
     <section class="panel"><h2>Plantilla completa</h2><div class="roster-grid">${riders.map(renderRosterCard).join("")}</div></section>`;
 }
@@ -610,7 +679,7 @@ function renderLiveRadar(groups){const rivals=getImportantRivals();return `<div 
 function renderEnergyHeatmap(){return `<div class="energy-map">${getTeamRiders(Game.selectedTeamId).map(r=>{const e=Game.live.states[r.id]?.energy||0,cls=e>68?"good":e>38?"warn":"bad";return `<div class="energy ${cls}"><strong>${esc(r.name)}</strong><span>${Math.round(e)}%</span></div>`;}).join("")}</div>`;}
 
 /* ============================================================
-   v0.24 Race Director Pro + Physical Group Engine + Rival AI
+   v0.24+ Race Director Pro + Physical Group Engine + Rival AI
    ============================================================ */
 
 function ensureV017State() {
@@ -651,7 +720,7 @@ function renderActionBar(live) {
     <div class="actionbar ${live ? "live" : ""}">
       <div>
         <strong>${live ? `Sector ${Game.live.sectorIndex + 1}/${stage.sectors.length} · ${sector.name}` : "Salida de etapa"}</strong>
-        <p>${live ? `Km ${sector.from}-${sector.to} · ${sector.question}` : "Simulación rápida o Race Director por sectores. Motor v0.24 basado en grupos, CP/W′ e IA rival."}</p>
+        <p>${live ? `Km ${sector.from}-${sector.to} · ${sector.question}` : "Simulación rápida o Race Director por sectores. Motor v0.24+ basado en grupos, CP/W′ e IA rival."}</p>
         <div class="actionbar-mini">
           <span class="control-pill ${situation.controlClass}">${situation.controlLabel}</span>
           <span class="control-pill ${situation.threatClass}">${situation.threatLabel}</span>
@@ -738,7 +807,7 @@ function renderVisualLanesPreview() {
       ${["Fuga", "Grupo perseguidor", "Grupo favoritos", "Pelotón", "Grupo 2", "Autobús", "Cortados"].map((x, i) => `
         <div class="lane ${i === 2 ? "fav" : i === 3 ? "peloton" : i === 0 ? "break" : ""}">
           <strong>${x}</strong>
-          <span>${i === 3 ? "Salida normal de carrera. El motor v0.24 moverá grupos según colaboración, potencia, W/kg y objetivos." : "—"}</span>
+          <span>${i === 3 ? "Salida normal de carrera. El motor v0.24+ moverá grupos según colaboración, potencia, W/kg y objetivos." : "—"}</span>
         </div>
       `).join("")}
     </div>`;
@@ -1283,7 +1352,7 @@ init();
 
 
 /* ============================================================
-   v0.24 MANAGER EXPANSION
+   v0.24+ MANAGER EXPANSION
    Prioridades 4, 5, 6 y 8: objetivos, mercado, forma/calendario,
    pantalla TV. Se amplía por extensión para conservar la base anterior.
    ============================================================ */
@@ -1292,7 +1361,7 @@ function ensureManagerSystems() {
   if (!Game.riders || !Game.riders.length) return;
   const team = Game.selectedTeamId ? getTeam(Game.selectedTeamId) : null;
   if (!Game.manager) Game.manager = {};
-  if (!Game.manager.version) Game.manager.version = "v0.24";
+  if (!Game.manager.version) Game.manager.version = "v0.24+";
   if (!Number.isFinite(Game.manager.budget)) {
     const base = team ? (team.level === "WT" ? 34000000 : 9200000) : 18000000;
     const ai = team && team.ai ? team.ai : { gc: 50, sprint: 50, classics: 50 };
@@ -1606,7 +1675,7 @@ renderBetweenRaces = function() {
   const next = byId(RACES, SEASON_RACE_IDS[Game.seasonIndex + 1]);
   const selected = Game.lastRaceRosterIds || [];
   const non = getFullTeamRiders(Game.selectedTeamId).filter(r => !selected.includes(r.id));
-  app.innerHTML = `<div class="header"><div><h1>Entre carreras</h1><p>Terminado: ${esc(curr.name)} · Próxima: ${next ? esc(next.name) : "Final de temporada"}</p></div><div class="top-actions"><button class="secondary" onclick="saveGame()">Guardar</button><button onclick="advanceToNextRace()">Aplicar camp y seguir</button></div></div>${renderManagerHeaderV019()}<section class="panel"><h2>Training camps v0.24</h2><p class="muted">Los no convocados entrenan; los convocados recuperan. El staff y el plan individual modifican el resultado.</p><div class="training-grid">${TRAINING_CAMPS_V019.map(t=>`<button class="training-card ${Game.trainingCampIdV019===t.id?"active":""}" onclick="Game.trainingCampIdV019='${t.id}';renderBetweenRaces()"><strong>${esc(t.name)}</strong><span>${esc(t.destination)} · ${t.days} días · ${moneyV019(t.cost)}</span><small>${esc(t.description)}</small><em>${formatEffects(t.effects)} · riesgo ${t.risk}%</em></button>`).join("")}</div></section><section class="panel"><h2>No convocados que entrenarán</h2><div class="roster-grid">${non.map(r=>`<div class="status-card"><div class="badge-row"><span class="badge green">${esc(r.role)}</span><span class="badge blue">Forma ${Math.round(r.form)}</span><span class="badge orange">Fatiga ${Math.round(r.fatigue)}</span></div><h3>${esc(r.name)}</h3>${miniStats(r)}</div>`).join("")}</div></section>`;
+  app.innerHTML = `<div class="header"><div><h1>Entre carreras</h1><p>Terminado: ${esc(curr.name)} · Próxima: ${next ? esc(next.name) : "Final de temporada"}</p></div><div class="top-actions"><button class="secondary" onclick="saveGame()">Guardar</button><button onclick="advanceToNextRace()">Aplicar camp y seguir</button></div></div>${renderManagerHeaderV019()}<section class="panel"><h2>Training camps v0.24+</h2><p class="muted">Los no convocados entrenan; los convocados recuperan. El staff y el plan individual modifican el resultado.</p><div class="training-grid">${TRAINING_CAMPS_V019.map(t=>`<button class="training-card ${Game.trainingCampIdV019===t.id?"active":""}" onclick="Game.trainingCampIdV019='${t.id}';renderBetweenRaces()"><strong>${esc(t.name)}</strong><span>${esc(t.destination)} · ${t.days} días · ${moneyV019(t.cost)}</span><small>${esc(t.description)}</small><em>${formatEffects(t.effects)} · riesgo ${t.risk}%</em></button>`).join("")}</div></section><section class="panel"><h2>No convocados que entrenarán</h2><div class="roster-grid">${non.map(r=>`<div class="status-card"><div class="badge-row"><span class="badge green">${esc(r.role)}</span><span class="badge blue">Forma ${Math.round(r.form)}</span><span class="badge orange">Fatiga ${Math.round(r.fatigue)}</span></div><h3>${esc(r.name)}</h3>${miniStats(r)}</div>`).join("")}</div></section>`;
 };
 
 function staffEffectV019(key) {

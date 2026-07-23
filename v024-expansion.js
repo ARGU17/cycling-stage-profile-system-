@@ -1,7 +1,7 @@
 /* ============================================================
-   CYCLING MANAGER TOUR v0.24
+   CYCLING MANAGER TOUR v0.24+
    v024-expansion.js
-   Integración v0.21 + v0.23 + v0.24 sobre la base v0.19.
+   Integración v0.21 + v0.23 + v0.24+ sobre la base v0.19.
 
    Funciones principales:
    - Motor físico por pendiente con CP/W′.
@@ -249,12 +249,16 @@ init = function() {
 
 const __v024_load_base = loadGame;
 loadGame = function() {
-  const raw = localStorage.getItem(SAVE_KEY);
-  if (!raw) return toast("No hay guardado v0.24. Empieza una partida nueva.");
+  const raw = safeStorageGet(SAVE_KEY);
+  if (!raw) {
+    return toast(STORAGE_STATE.available
+      ? "No hay guardado v0.24+. Empieza una partida nueva."
+      : "El navegador bloquea el almacenamiento local. Puedes jugar, pero no cargar partidas.");
+  }
   try {
     const obj = JSON.parse(raw);
     if (obj.version !== SAVE_VERSION && obj.version !== V024_VERSION) {
-      localStorage.removeItem(SAVE_KEY);
+      safeStorageRemove(SAVE_KEY);
       toast("Guardado incompatible eliminado. Inicia una partida nueva.");
       return init();
     }
@@ -265,7 +269,7 @@ loadGame = function() {
     render();
   } catch (error) {
     console.error(error);
-    localStorage.removeItem(SAVE_KEY);
+    safeStorageRemove(SAVE_KEY);
     toast("Guardado corrupto eliminado.");
     init();
   }
@@ -275,22 +279,26 @@ const __v024_save_base = saveGame;
 saveGame = function(show = true) {
   ensureV024State();
   Game.version = V024_VERSION;
-  localStorage.setItem(SAVE_KEY, JSON.stringify(Game));
-  if (show) toast("Partida v0.24 guardada");
+  const saved = safeStorageSet(SAVE_KEY, JSON.stringify(Game));
+  if (show) {
+    toast(saved ? "Partida v0.24+ guardada" : "La partida continúa, pero el navegador bloquea el guardado local");
+  }
+  return saved;
 };
 
 const __v024_clear_base = clearSave;
 clearSave = function() {
   __v024_clear_base();
-  ["cyclingManager_v015", "cyclingManager_v017", "cyclingManager_v019", "cyclingManager_v021", "cyclingManager_v023", "cyclingManager_v024"].forEach(k => localStorage.removeItem(k));
-  toast("Guardados anteriores borrados");
+  ["cyclingManager_v015", "cyclingManager_v017", "cyclingManager_v019", "cyclingManager_v021", "cyclingManager_v023", "cyclingManager_v024", "cyclingManager_v024plus"].forEach(safeStorageRemove);
+  toast(STORAGE_STATE.available ? "Guardados anteriores borrados" : "El navegador bloquea el almacenamiento local");
 };
 
 const __v024_selectTeam_base = selectTeam;
 selectTeam = function(teamId) {
+  // La función base ya prepara y renderiza la convocatoria.
+  // Evitamos una segunda inicialización que podía pisar el estado en navegadores móviles.
   __v024_selectTeam_base(teamId);
   ensureV024State();
-  prepareRosterSelection();
 };
 
 const __v024_autoSelectRoster_base = autoSelectRoster;
@@ -1545,7 +1553,7 @@ function simulateTTTSectorV024(stage, sector) {
   TEAMS.forEach(team => {
     let active = getTeamRiders(team.id).filter(r => Game.live.states[r.id] && !String(Game.live.states[r.id].groupId).startsWith("ttt_drop"));
     for (let km = start; km < end; km++) {
-      const distance = Math.min(1, sector.to - km); if (distance <= 0 || active.length < 4) continue;
+      const distance = Math.min(1, sector.to - km); if (distance <= 0 || active.length < 1) continue;
       const capacities = active.map((r, i) => {
         const st = Game.live.states[r.id];
         const baseEffort = Game.riderEfforts[r.id] ?? r.defaultEffort;
@@ -1900,14 +1908,14 @@ function renderAdvancedBroadcastV024(full = true) {
 renderLiveBroadcastV024 = function() {
   if (!Game.live) return renderRace();
   const stage = getStage(), sector = stage.sectors[Game.live.sectorIndex];
-  app.innerHTML = `<div class="header"><div><h1>Realización TV v0.24</h1><p>${esc(stage.name)} · sector ${Game.live.sectorIndex + 1}/${stage.sectors.length}</p></div><div class="top-actions"><button onclick="renderLive()">Race Director</button><button class="secondary" onclick="simulateSector()">Simular sector</button><button class="secondary" onclick="saveGame()">Guardar</button></div></div>${renderAdvancedBroadcastV024(true)}`;
+  app.innerHTML = `<div class="header"><div><h1>Realización TV v0.24+</h1><p>${esc(stage.name)} · sector ${Game.live.sectorIndex + 1}/${stage.sectors.length}</p></div><div class="top-actions"><button onclick="renderLive()">Race Director</button><button class="secondary" onclick="simulateSector()">Simular sector</button><button class="secondary" onclick="saveGame()">Guardar</button></div></div>${renderAdvancedBroadcastV024(true)}`;
 };
 
 const __v024_renderLive_base = renderLive;
 renderLive = function() {
   ensureV024State();
   const stage = getStage(), sector = stage.sectors[Game.live.sectorIndex], groups = buildGroups(), situation = analyzeRaceSituation(groups, stage, sector);
-  app.innerHTML = `<div class="header"><div><h1>Race Director v0.24 · ${esc(stage.name)}</h1><p>Sector ${Game.live.sectorIndex + 1}/${stage.sectors.length} · km ${sector.from}-${sector.to} · motor CP/W′</p></div><div class="top-actions"><button class="secondary" onclick="saveGame()">Guardar</button><button class="secondary" onclick="renderLiveBroadcastV024()">Vista TV</button></div></div>
+  app.innerHTML = `<div class="header"><div><h1>Race Director v0.24+ · ${esc(stage.name)}</h1><p>Sector ${Game.live.sectorIndex + 1}/${stage.sectors.length} · km ${sector.from}-${sector.to} · motor CP/W′</p></div><div class="top-actions"><button class="secondary" onclick="saveGame()">Guardar</button><button class="secondary" onclick="renderLiveBroadcastV024()">Vista TV</button></div></div>
     ${renderActionBar(true)}
     <section class="panel">${renderWeather(stage)}${renderRaceControlPanel(situation, true)}${renderBroadcastOverlayV019(groups, situation)}${renderStageProfile(stage, groups)}${renderTVLanes(groups)}${renderThreatPanel(situation, true)}${renderDirectorRecommendation(situation, true)}</section>
     <div class="grid live-grid"><section class="panel"><h2>Decisión del sector</h2><div class="sector-focus"><strong>${esc(sector.question)}</strong><p>${esc(sector.name)} · Dificultad ${sector.difficulty} · pendiente actual ${slopeAtKmV024(stage, sector.from).toFixed(1)}%</p></div>${isTTT(stage) ? renderTTTControls(true) : ""}${renderLiveRadar(groups)}${renderQuickControls(true)}${renderAdvancedTacticsV024(true)}</section><section class="panel"><h2>Radio / TV</h2><div class="radio-list">${Game.live.radio.map(r => `<div class="radio"><span>${esc(r.time)}</span><p>${esc(r.msg)}</p></div>`).join("")}</div><h2>Alertas activas</h2><div class="alert-feed">${Game.live.v024.alerts.map(a => `<div class="live-alert ${a.severity}"><span>km ${a.km}</span><p>${esc(a.message)}</p></div>`).join("") || `<p class="muted">Sin alertas.</p>`}</div><h2>Stock coche</h2>${renderStock(Game.stock)}</section></div>
@@ -1935,7 +1943,7 @@ renderRace = function() {
   const tabs = [
     ["director", "Race Director"], ["broadcast", "TV"], ["strategy", "Estrategia"], ["nutrition", "Alimentación"], ["material", "Material"], ["team", "Equipo"], ["class", "Clasificaciones"], ["objectives", "Objetivos"], ["season_plan", "Plan anual"], ["contracts", "Contratos / Cantera"], ["operations", "Staff / Logística"], ["analytics", "Análisis"], ["alerts", "Alertas"], ["records", "Récords"], ["history", "Historial"]
   ];
-  app.innerHTML = `<div class="header"><div><h1>${esc(team.name)}</h1><p>v0.24 · ${Game.mode === "season" ? `Temporada ${Game.seasonIndex + 1}/${SEASON_RACE_IDS.length} · ` : ""}${esc(race.name)} · Etapa ${Game.currentStageIndex + 1}/${race.stages.length}</p></div><div class="top-actions"><button class="secondary" onclick="saveGame()">Guardar</button><button class="danger" onclick="init()">Reiniciar</button></div></div>${renderManagerHeaderV019()}${renderLeaderStrip()}<div class="tabs">${tabs.map(([id, label]) => `<button class="tab ${Game.activeTab === id ? "active" : ""}" onclick="setTab('${id}')">${label}</button>`).join("")}</div>
+  app.innerHTML = `<div class="header"><div><h1>${esc(team.name)}</h1><p>v0.24+ · ${Game.mode === "season" ? `Temporada ${Game.seasonIndex + 1}/${SEASON_RACE_IDS.length} · ` : ""}${esc(race.name)} · Etapa ${Game.currentStageIndex + 1}/${race.stages.length}</p></div><div class="top-actions"><button class="secondary" onclick="saveGame()">Guardar</button><button class="danger" onclick="init()">Reiniciar</button></div></div>${renderManagerHeaderV019()}${renderLeaderStrip()}<div class="tabs">${tabs.map(([id, label]) => `<button class="tab ${Game.activeTab === id ? "active" : ""}" onclick="setTab('${id}')">${label}</button>`).join("")}</div>
     ${Game.activeTab === "director" ? renderDirectorTab() : ""}
     ${Game.activeTab === "broadcast" ? renderBroadcastTabV019() : ""}
     ${Game.activeTab === "strategy" ? renderStrategyTab(false) : ""}
@@ -2039,7 +2047,7 @@ renderHome = function() {
   __v024_renderHome_base();
   const title = app.querySelector(".header h1");
   const subtitle = app.querySelector(".header p");
-  if (title) title.textContent = "Cycling Manager Tour v0.24";
+  if (title) title.textContent = "Cycling Manager Tour v0.24+";
   if (subtitle) subtitle.textContent = "Motor físico CP/W′ · grupos y formaciones · manager avanzado · telemetría · IA rival";
 };
 

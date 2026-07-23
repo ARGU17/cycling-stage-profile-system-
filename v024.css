@@ -1,5 +1,5 @@
 /* ============================================================
-   CYCLING MANAGER TOUR v0.24
+   CYCLING MANAGER TOUR v0.24+
    v024.css
    Capa visual adicional. Se carga después de styles.css.
    ============================================================ */
@@ -345,7 +345,7 @@
   background: linear-gradient(90deg, #a78bfa, #38bdf8);
 }
 
-/* Perfil v0.24 */
+/* Perfil v0.24+ */
 .v024-profile .profile-svg svg {
   min-height: 340px;
 }

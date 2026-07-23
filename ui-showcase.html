@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es" class="v028-graphite">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0d10">
+  <title>Graphite Performance · UI Showcase</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="v028.css">
+  <style>
+    .showcase{display:grid;gap:16px}.showcase-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.swatch{display:grid;gap:8px}.swatch i{height:70px;border:1px solid rgba(255,255,255,.1);border-radius:10px}.swatch b{font-size:11px}.swatch span{color:#697382;font-family:var(--font-mono);font-size:9px}.demo-jersey{width:150px;margin:auto}.demo-team{min-height:320px}.type-sample{display:grid;gap:10px}.type-sample h1,.type-sample h2,.type-sample h3,.type-sample p{margin:0}.showcase .panel{overflow:visible}@media(max-width:900px){.showcase-grid,.swatches{grid-template-columns:1fr 1fr}}@media(max-width:600px){.showcase-grid,.swatches{grid-template-columns:1fr}}
+  </style>
+</head>
+<body class="v028-ui">
+<div id="app">
+  <header class="v028-wizard-header">
+    <div class="v028-header-main"><div><span class="v028-brandline">CYCLING MANAGER <b>TOUR</b> <em>V0.28</em></span><h1>Graphite Performance</h1><p>Referencia visual de color, tipografía y componentes.</p></div></div>
+    <div class="v028-header-actions"><a href="index.html"><button>Volver al simulador</button></a></div>
+  </header>
+  <main class="v028-wizard-stage showcase">
+    <section class="panel"><h2>Paleta de colores</h2><div class="swatches">
+      <div class="swatch"><i style="background:#0b0d10"></i><b>Fondo</b><span>#0B0D10</span></div>
+      <div class="swatch"><i style="background:#161a20"></i><b>Superficie</b><span>#161A20</span></div>
+      <div class="swatch"><i style="background:#1c2129"></i><b>Elevada</b><span>#1C2129</span></div>
+      <div class="swatch"><i style="background:#222833"></i><b>Hover</b><span>#222833</span></div>
+      <div class="swatch"><i style="background:#0a84ff"></i><b>Azul</b><span>#0A84FF</span></div>
+      <div class="swatch"><i style="background:#30d158"></i><b>Verde</b><span>#30D158</span></div>
+      <div class="swatch"><i style="background:#ffd60a"></i><b>Amarillo</b><span>#FFD60A</span></div>
+      <div class="swatch"><i style="background:#ff9f0a"></i><b>Naranja</b><span>#FF9F0A</span></div>
+      <div class="swatch"><i style="background:#ff453a"></i><b>Rojo</b><span>#FF453A</span></div>
+      <div class="swatch"><i style="background:#f5f7fa"></i><b>Texto</b><span>#F5F7FA</span></div>
+    </div></section>
+    <section class="showcase-grid">
+      <article class="panel type-sample"><span class="v028-kicker">TIPOGRAFÍA APPLE</span><h1>SF Pro Display</h1><h2>Título de sección</h2><h3>Nombre de equipo</h3><p class="muted">Texto secundario y datos de contexto.</p><code>00:24:15 · 320 W · +00:12</code></article>
+      <article class="panel"><h2>Botones</h2><div class="button-row"><button>Continuar</button><button class="secondary">Cancelar</button><button class="danger">Borrar guardado</button><button disabled>No disponible</button></div></article>
+      <article class="panel"><h2>Estados</h2><div class="badge-row"><span class="badge blue">WORLD TOUR</span><span class="badge orange">GRAN VUELTA</span><span class="badge red">MONUMENTO</span><span class="badge green">CONTROLADO</span></div></article>
+    </section>
+    <section class="showcase-grid">
+      <button class="v028-mode-card"><span class="v028-mode-number">01</span><span class="v028-mode-icon">🚴</span><strong>Carrera individual</strong><small>Una prueba con equipos del mismo año.</small><span class="v028-mode-arrow">→</span></button>
+      <article class="v028-race-card" style="--race-tone:#ffd60a;--race-fill:rgba(255,214,10,.12);--race-glow:rgba(255,214,10,.3)"><div class="v028-race-top"><span class="v028-race-date">04 JUL — 26 JUL</span><span class="v028-category grand">GRAN VUELTA</span></div><strong class="v028-race-name">Tour de France</strong><div class="v028-race-meta"><span>21 etapas</span><i>·</i><span>3.338 km</span></div><div class="v028-race-limit">22 equipos</div><svg class="v028-race-profile" viewBox="0 0 320 74" preserveAspectRatio="none"><path d="M0 62 L25 57 L48 61 L76 50 L102 59 L130 42 L153 51 L183 23 L205 48 L235 28 L260 46 L287 12 L320 36 L320 68 L0 68 Z" fill="rgba(255,214,10,.16)"/><path d="M0 62 L25 57 L48 61 L76 50 L102 59 L130 42 L153 51 L183 23 L205 48 L235 28 L260 46 L287 12 L320 36" fill="none" stroke="#ffd60a" stroke-width="2.5"/></svg><span class="v028-card-arrow">→</span></article>
+      <article class="v028-team-card demo-team" style="--team-primary:#006c66;--team-secondary:#09292a;--team-accent:#f26b3a"><div class="v028-team-top"><span class="v028-level-badge wt">WT</span><span class="v028-year-badge">2026</span></div><div class="v028-jersey-stage"><svg class="v028-jersey-svg demo-jersey" viewBox="0 0 220 190"><path d="M71 30 91 17h38l20 13 35 15-16 40-21-8v92H73V77l-21 8-16-40 35-15Z" fill="url(#demo)" stroke="rgba(255,255,255,.35)" stroke-width="2"/><defs><linearGradient id="demo"><stop stop-color="#007b74"/><stop offset=".7" stop-color="#09292a"/></linearGradient></defs><path d="M60 55 160 110" stroke="#f26b3a" stroke-width="17"/><path d="M91 17q19 25 38 0" fill="#0d1117"/><text x="110" y="96" text-anchor="middle" fill="#fff" font-size="19" font-weight="900">BAHRAIN</text></svg></div><div class="v028-team-copy"><strong>Bahrain Victorious</strong><span>🇧🇭 Bahrain</span></div><div class="v028-team-stats"><span>22 corredores</span><span>Fuerza 84</span></div><div class="v028-avatar-stack"><span class="v028-avatar compact" style="--avatar:#335cff"><i>AL</i></span><span class="v028-avatar compact" style="--avatar:#ff714a"><i>PB</i></span><span class="v028-avatar compact" style="--avatar:#36c58c"><i>ST</i></span><span class="v028-avatar-more">+18</span></div></article>
+    </section>
+  </main>
+</div>
+</body>
+</html>

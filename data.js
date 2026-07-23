@@ -4,7 +4,7 @@
    v0.19 Pro Peloton + Season Calendar + TT/TTT + Training Camps
    ============================================================ */
 
-const SAVE_VERSION = "v0.24";
+const SAVE_VERSION = "v0.24+";
 const ROSTER_SIZE = 8;
 const DEFAULT_RACE_ID = "santos";
 

@@ -1,213 +1,157 @@
-# Cycling Manager Tour v0.26 · Stage Lab + salto de temporada
+# Cycling Manager Tour v0.28 · Graphite Performance
 
-Esta versión conserva íntegramente la integración de **Grand Tour Stage Lab** de v0.25 y añade un planificador de calendario para el modo temporada.
+La **v0.28** es una actualización visual completa de la **v0.27 GPX Stage Lab**. No sustituye el motor de simulación ni elimina módulos: añade una nueva capa de interfaz cargada después de todos los sistemas anteriores.
 
-Ahora puedes decidir qué carreras quieres disputar manualmente y cuáles deben simularse automáticamente para avanzar directamente hacia las grandes vueltas, monumentos, Mundial u otros objetivos prioritarios.
+## Objetivo de la versión
 
-## Flujo de temporada v0.26
+La interfaz adopta una estética **Graphite Performance**:
 
-```text
-Modo temporada
-→ seleccionar carreras manuales/automáticas
-→ seleccionar equipo
-→ simulación automática de eventos no prioritarios
-→ Grand Tour Stage Lab en la siguiente carrera manual
-→ selección de 8 corredores
-→ desarrollo normal de la competición
-→ planificador entre carreras
-```
+- Fondo negro grafito.
+- Superficies jerarquizadas y bordes de baja opacidad.
+- Azul como acción principal.
+- Verde, amarillo, naranja, rojo, rosa y morado para estados deportivos.
+- Tipografía del sistema Apple mediante `-apple-system`, `SF Pro Display` y `SF Pro Text` cuando están disponibles.
+- Datos técnicos con `SF Mono` o la fuente monoespaciada del sistema.
+- Tarjetas más visuales, menos densas y con una jerarquía más clara.
 
-Las pruebas marcadas como **JUGAR** conservan el flujo completo:
+No se distribuye ningún archivo de fuente. En dispositivos Apple se utilizan automáticamente las fuentes instaladas por el sistema; en Windows y Android se aplican alternativas nativas.
 
-```text
-Stage Lab → GPX → perfil Radial → convocatoria → carrera con física a 250 m
-```
+## Nuevo asistente visual
 
-Las pruebas marcadas como **AUTO** se resuelven en segundo plano y el calendario continúa automáticamente.
+### 1. Selección de modo
 
----
+- Cuatro tarjetas de gran formato.
+- Iconografía vectorial integrada.
+- Numeración visual 01–04.
+- Identificación específica de modos multi-era.
+- Resumen visual de Stage Lab, motor CP/W′ y Director Suite.
 
-## Funciones nuevas v0.26
+### 2. Selección de carreras
 
-### Planificador de calendario
+- Tarjetas con mini perfil altimétrico real generado desde los datos de cada prueba.
+- Color propio por competición.
+- Identificación de gran vuelta, monumento, clásica, crono o vuelta por etapas.
+- Distancia total, número de etapas y límite de equipos.
+- Buscador y filtros por categoría.
+- Selección múltiple para temporadas.
 
-En la pantalla inicial del modo temporada aparece un panel con las 36 carreras. Cada evento puede configurarse como:
+### 3. Selección de equipos
 
-- **JUGAR:** abre Grand Tour Stage Lab y continúa con la convocatoria y carrera normal.
-- **AUTO:** se simula automáticamente sin abrir Stage Lab ni detener el calendario.
+- Tarjetas de equipo con maillot vectorial tridimensional.
+- Colores de cada estructura.
+- Año, categoría, país, número de corredores y fuerza deportiva.
+- Avatares visuales de los principales ciclistas.
+- Filtros WT, ProTeam, Continental y todos.
+- Selección confirmable mediante una barra inferior persistente.
 
-### Presets incluidos
+### 4. Convocatoria
 
-- Todo el calendario.
-- Solo grandes vueltas.
-- Grandes vueltas + monumentos + Mundial.
-- Todas las vueltas por etapas.
-- Selección personalizada.
-- Marcar todas las carreras restantes.
-- Simular todas las carreras restantes.
+- Resumen visual del equipo y la carrera.
+- Contador de seleccionados.
+- Lista compacta de los corredores elegidos.
+- Tarjetas individuales con rol, base, forma y barras de montaña, CRI, sprint y llano.
+- Conserva las convocatorias históricas adaptativas y las reservas de archivo.
 
-### Salto directo desde “Entre carreras”
+## Rediseño del juego completo
 
-Después de terminar un evento puedes seleccionar cualquier competición futura y pulsar:
+La nueva colorimetría y el sistema de componentes también se aplican a:
 
-```text
-Simular hasta este evento
-```
+- Race Director.
+- Panel de amenaza táctica.
+- Recomendación del director.
+- Estado de carrera y clima.
+- Carriles de grupos.
+- Vista TV y narración.
+- Perfil 2D y perfil GPX.
+- Mapa GPX.
+- Clasificaciones.
+- Material, nutrición y neumáticos.
+- Staff y mercado.
+- Mercado U23.
+- Contratos, objetivos y scouting.
+- Autobuses, coches y departamentos.
+- Telemetría, gráficos y palmarés.
 
-El juego procesa automáticamente todas las carreras intermedias y abre Grand Tour Stage Lab en el objetivo seleccionado.
+## Stage Lab
 
-### Simular la carrera actual desde Stage Lab
+El iframe de Grand Tour Stage Lab conserva todas sus funciones y recibe una capa visual específica:
 
-La cabecera de Stage Lab incorpora el botón:
+- Paleta grafito común con el manager.
+- Botones azules y estados verdes.
+- Paneles más compactos.
+- Formularios y controles unificados.
+- Perfil, mapa, libro de ruta y configuración sin cambios funcionales.
 
-```text
-Simular esta carrera y continuar
-```
+## Funcionalidades preservadas de v0.27
 
-Permite cambiar de decisión sin volver al menú inicial.
+- Archivo histórico 1990–2026.
+- Base 2026 de 34 equipos y 927 registros de corredor.
+- Carrera histórica y temporada histórica.
+- Carrera y temporada multi-era.
+- Selección manual del pelotón multi-era.
+- 25 equipos en pruebas normales y 22 en Tour, Giro y Vuelta.
+- Grand Tour Stage Lab.
+- Generación, importación y exportación GPX.
+- Perfiles y sectores físicos a partir del GPX.
+- Motor por pendiente cada 250 m.
+- CP, W′ y recuperación anaeróbica.
+- Grupos, formaciones, ataques y respuestas.
+- Corredores puente y ataques de largo alcance.
+- Autobús de sprinters.
+- Viento, abanicos, descensos y pavé.
+- CRI y CRE.
+- IA de equipos rivales.
+- Nutrición, material, neumáticos y presiones.
+- Objetivos A/B/C y calendario individual.
+- Contratos y promesas.
+- Staff nominal y mercado de 1.000 profesionales.
+- Mercado de 1.000 corredores U23.
+- Scouting, cantera y mentoría.
+- Autobuses, coches, patrocinio y departamentos.
+- Logística, telemetría, gráficos, alertas, récords y palmarés.
 
-### Progreso y parada segura
+## Archivos nuevos
 
-Durante el salto se muestra:
+- `v028.css`: sistema visual Graphite Performance y actualización de todas las pantallas.
+- `v028.js`: renderizado visual del asistente, carreras, equipos, maillots y convocatoria.
+- `stage-lab/v028-stage-lab.css`: tema visual del laboratorio GPX.
+- `tools/smoke_test_v028_ui.js`: prueba del flujo visual y funcional.
+- `UI_GUIDE.md`: referencia de color, tipografía y componentes.
+- `ui-showcase.html`: galería estática de la nueva interfaz.
 
-- carrera que se está simulando;
-- objetivo final;
-- carreras completadas;
-- porcentaje de progreso;
-- resultados recientes;
-- botón para detenerse después de la carrera actual.
-
----
-
-## Modelo de simulación automática
-
-Las carreras omitidas utilizan un **motor deportivo condensado v0.26** diseñado para avanzar el calendario rápidamente sin ejecutar cada kilómetro de forma visual.
-
-El resultado de cada etapa sigue considerando:
-
-- atributos específicos del terreno;
-- rol del corredor;
-- forma y fatiga;
-- CP relativo y W′;
-- durabilidad fisiológica;
-- readiness y objetivos A/B/C;
-- material y neumáticos;
-- clima, pavé y riesgo técnico;
-- CRI y CRE;
-- penalización de sprinters en montaña;
-- agrupamiento y diferencias por tipo de etapa.
-
-También se conservan y actualizan:
-
-- clasificaciones y tiempos acumulados;
-- victorias de etapa y carrera;
-- puntos UCI;
-- fatiga, forma, moral y días de competición;
-- objetivos del sponsor;
-- contratos y promesas;
-- scouting y mentoría;
-- palmarés y récords;
-- entrenamiento entre carreras;
-- historial de temporada.
-
-Las carreras jugadas manualmente siguen utilizando el motor GPX completo de v0.25, con subpasos físicos de **250 m**, CP/W′, grupos, ataques, viento, drafting, nutrición y telemetría.
-
----
-
-## Grand Tour Stage Lab
-
-Stage Lab sigue conectado a los **36 eventos** del calendario y mantiene:
-
-- generación y edición de recorridos;
-- rutas GPX;
-- enrutado opcional OpenStreetMap/Valhalla;
-- mapa 2D y terreno 3D;
-- perfil interactivo;
-- puertos y sectores;
-- exportación GPX y ZIP;
-- transferencia directa al motor del manager.
-
-La colorimetría Radial se conserva sin cambios:
-
-| Pendiente | Color |
-|---:|---|
-| ≤ −9 % | `#1a4bff` |
-| −9 a −6 % | `#2c7cff` |
-| −6 a −3 % | `#2bb2ff` |
-| −3 a −1 % | `#24c6c6` |
-| −1 a 1,5 % | `#14b81f` |
-| 1,5 a 3 % | `#63cf15` |
-| 3 a 5 % | `#b5c718` |
-| 5 a 7 % | `#e4c625` |
-| 7 a 9 % | `#ee9430` |
-| > 9 % | `#dd5a22` |
-
----
+Los archivos de v0.27 permanecen en el proyecto y siguen cargándose antes de la nueva capa.
 
 ## Instalación en GitHub Pages
 
-1. Descomprime el ZIP.
-2. Sube **todo el contenido** a la raíz del repositorio.
-3. Mantén intacta la carpeta `stage-lab/`.
-4. Activa GitHub Pages desde la rama principal y la carpeta raíz.
-5. Realiza una recarga forzada después de sustituir la versión anterior.
+1. Descomprime `cycling-manager-v028.zip`.
+2. Sube **todo el contenido** de la carpeta a la raíz del repositorio.
+3. Conserva las carpetas:
+   - `.github`
+   - `gpx`
+   - `historical-data`
+   - `stage-lab`
+   - `tools`
+4. Mantén `.nojekyll`.
+5. Activa GitHub Pages desde la rama principal y la carpeta raíz.
 
-Ejecución local:
+No elimines `v027.js`, `v027.css`, los módulos GPX ni los archivos v0.26: la v0.28 los amplía, no los reemplaza.
+
+## Guardado
+
+Se mantiene el esquema de guardado de v0.26/v0.27 para no invalidar partidas existentes. La actualización visual no requiere migración de datos.
+
+## Pruebas
 
 ```bash
-python -m http.server 8080
+node tools/smoke_test_v028_ui.js
+node tools/smoke_test_v028.js
+node tools/test_v027_stage_lab_multistage.js
+node tools/smoke_test_v026_full.js
+cd stage-lab && npm test
 ```
 
-Después abre:
+Consulta `TEST_REPORT.md` para ver el resultado completo.
 
-```text
-http://localhost:8080
-```
+## Versión
 
-No se recomienda abrir directamente con `file://` porque el iframe y los mapas pueden quedar restringidos por el navegador.
-
----
-
-## Archivos principales
-
-```text
-index.html
-styles.css
-v024.css
-gpx.css
-stage-lab-integration.css
-v026.css
-
-data.js
-v024-data.js
-gpx-stage-data.js
-gpx-engine.js
-game.js
-v024-expansion.js
-gpx-integration.js
-v024-plus-fix.js
-stage-lab-integration.js
-v026-season-skip.js
-
-stage-lab/
-```
-
-`v026-season-skip.js` debe cargarse el último, ya que amplía los flujos de inicio, calendario, Stage Lab, pantalla entre carreras, guardado y final de temporada.
-
----
-
-## Guardado y compatibilidad
-
-La versión declarada es:
-
-```text
-v0.26
-```
-
-Se mantiene la clave histórica:
-
-```text
-cyclingManager_v024
-```
-
-El cargador acepta partidas de v0.24, v0.24+, v0.25 y v0.26. Para una prueba completamente limpia se recomienda pulsar **Borrar guardado** al sustituir la versión anterior.
+`v0.28-graphite-performance`

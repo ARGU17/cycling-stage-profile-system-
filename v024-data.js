@@ -1,10 +1,10 @@
 /* ============================================================
-   CYCLING MANAGER TOUR v0.24
+   CYCLING MANAGER TOUR v0.24+
    v024-data.js
    Sistemas avanzados añadidos sobre la base v0.19.
    ============================================================ */
 
-const V024_VERSION = "v0.24";
+const V024_VERSION = "v0.24+";
 
 const PHYSIOLOGY_PROFILES_V024 = {
   gc:         { cpWkg: 5.55, wPrimeKJ: 23, vo2: 79, sprintReserve: 0.92, durability: 1.08 },

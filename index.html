@@ -3,13 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0b1120" />
-  <title>Cycling Manager v0.26 · Season Fast-Forward + Stage Lab</title>
+  <meta name="theme-color" content="#0b0d10" />
+  <meta name="description" content="Cycling Manager Tour v0.28 Graphite Performance con Director Suite, archivo histórico 1990-2026, Stage Lab GPX y nueva interfaz visual." />
+  <title>Cycling Manager Tour v0.28 · Graphite Performance</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="v024.css" />
+  <link rel="stylesheet" href="historical.css" />
+  <link rel="stylesheet" href="v026.css" />
   <link rel="stylesheet" href="gpx.css" />
   <link rel="stylesheet" href="stage-lab-integration.css" />
-  <link rel="stylesheet" href="v026.css" />
+  <link rel="stylesheet" href="v027.css" />
+  <link rel="stylesheet" href="v028.css" />
 </head>
 <body>
   <div id="app"></div>
@@ -17,23 +21,27 @@
   <script src="data.js"></script>
   <script src="v024-data.js"></script>
 
-  <!-- GPX data and route/elevation engine must load before game.js -->
+  <!-- Rutas GPX reales incluidas y utilidades de altimetría. Deben cargarse
+       antes de game.js para que el calendario base 2026 conserve los GPX. -->
   <script src="gpx-stage-data.js"></script>
   <script src="gpx-engine.js"></script>
 
   <script src="game.js"></script>
   <script src="v024-expansion.js"></script>
+  <script src="historical-manifest.js"></script>
+  <script src="current-2026-major.js"></script>
+  <script src="staff-database.js"></script>
+  <script src="historical-engine.js"></script>
+  <script src="staff-market-v026.js"></script>
+  <script src="youth-market-v026.js"></script>
+  <script src="v026-management.js"></script>
+  <script src="v026-frontoffice.js"></script>
 
-  <!-- Runtime hooks: 250 m physics + interactive profile/route -->
-  <script src="gpx-integration.js"></script>
-
-  <!-- v0.24+ hotfix: robust roster confirmation and safe persistence -->
-  <script src="v024-plus-fix.js"></script>
-
-  <!-- v0.25: Grand Tour Stage Lab for every calendar event -->
-  <script src="stage-lab-integration.js"></script>
-
-  <!-- v0.26: selective season calendar + automatic race simulation -->
-  <script src="v026-season-skip.js"></script>
+  <!-- v0.27: el perfil, el mapa y la física GPX se conectan después de que
+       v0.26 haya instalado sus versiones finales de render y simulación. -->
+  <script src="gpx-integration-v027.js"></script>
+  <script src="stage-lab-integration-v027.js"></script>
+  <script src="v027.js"></script>
+  <script src="v028.js"></script>
 </body>
 </html>
