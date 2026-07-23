@@ -1,0 +1,81 @@
+/* ============================================================
+   CYCLING MANAGER TOUR v0.26 · Season planner and fast-forward
+   ============================================================ */
+
+.v026-season-planner { border-color: rgba(45, 212, 191, .34); }
+.v026-season-planner .section-heading { margin-bottom: 12px; }
+.v026-preset-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.v026-preset-row button.active { background: linear-gradient(180deg, #5eead4, #14b8a6); color: #042f2e; }
+
+.v026-race-plan-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  max-height: 620px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.v026-race-plan-card {
+  display: grid;
+  grid-template-columns: auto 34px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  min-height: 66px;
+  padding: 9px;
+  border-radius: 13px;
+  border: 1px solid var(--border);
+  background: rgba(15, 23, 42, .50);
+  cursor: pointer;
+}
+
+.v026-race-plan-card.manual { border-color: rgba(34, 197, 94, .50); background: rgba(34, 197, 94, .09); }
+.v026-race-plan-card.automatic { border-color: rgba(245, 158, 11, .38); background: rgba(245, 158, 11, .07); }
+.v026-race-plan-card.completed { opacity: .62; }
+.v026-race-plan-card input { width: 18px; height: 18px; accent-color: var(--green); }
+.v026-plan-index { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 10px; background: rgba(148, 163, 184, .12); font-weight: 950; }
+.v026-plan-copy { display: grid; gap: 4px; min-width: 0; }
+.v026-plan-copy b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.v026-plan-copy small { color: var(--muted); font-size: 10px; }
+.v026-plan-mode { padding: 5px 7px; border-radius: 999px; color: #bbf7d0; background: rgba(34, 197, 94, .14); border: 1px solid rgba(34, 197, 94, .32); font-size: 9px; font-weight: 950; }
+.v026-race-plan-card.automatic .v026-plan-mode { color: #fde68a; background: rgba(245, 158, 11, .13); border-color: rgba(245, 158, 11, .34); }
+.v026-race-plan-card.completed .v026-plan-mode { color: #bae6fd; background: rgba(56, 189, 248, .12); border-color: rgba(56, 189, 248, .30); }
+
+.v026-jump-panel { border-color: rgba(167, 139, 250, .38); }
+.v026-jump-controls { display: grid; grid-template-columns: minmax(260px, 1fr) auto; gap: 10px; align-items: center; }
+
+.v026-fast-shell { min-height: 100vh; }
+.v026-fast-card { display: grid; place-items: center; text-align: center; gap: 10px; padding: 38px; }
+.v026-fast-icon { font-size: 58px; filter: drop-shadow(0 10px 20px rgba(45, 212, 191, .28)); }
+.v026-progress { width: min(820px, 100%); height: 15px; border-radius: 999px; overflow: hidden; background: rgba(15, 23, 42, .84); border: 1px solid var(--border); }
+.v026-progress div { height: 100%; background: linear-gradient(90deg, #2dd4bf, #22c55e, #38bdf8); transition: width .25s ease; }
+
+.v026-simulated-results { display: grid; gap: 8px; }
+.v026-simulated-results > div { display: grid; grid-template-columns: 90px minmax(180px, .55fr) minmax(320px, 1fr); align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 12px; background: rgba(15, 23, 42, .45); }
+.v026-simulated-results span, .v026-simulated-results small { color: var(--muted); }
+
+@media (max-width: 1180px) {
+  .v026-race-plan-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 760px) {
+  .v026-race-plan-grid { grid-template-columns: 1fr; }
+  .v026-jump-controls { grid-template-columns: 1fr; }
+  .v026-simulated-results > div { grid-template-columns: 1fr; }
+  .v026-fast-card { padding: 24px 14px; }
+}
+
+.v026-auto-training {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+  padding: 10px 12px;
+  border: 1px solid rgba(56, 189, 248, .24);
+  border-radius: 12px;
+  background: rgba(56, 189, 248, .07);
+  cursor: pointer;
+}
+.v026-auto-training input { width: 19px; height: 19px; accent-color: var(--blue); }
+.v026-auto-training span { display: grid; gap: 2px; }
+.v026-auto-training small { color: var(--muted); }

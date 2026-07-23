@@ -11,11 +11,13 @@
    - Team selection is prepared once, avoiding the old double pass.
    ============================================================ */
 
-const V024_PLUS_VERSION = "v0.24+";
+const V024_PLUS_VERSION = "v0.26";
 const V024_PLUS_SAVE_KEY = typeof SAVE_KEY === "string" ? SAVE_KEY : "cyclingManager_v024";
 const V024_PLUS_ACCEPTED_VERSIONS = new Set([
   typeof SAVE_VERSION === "string" ? SAVE_VERSION : "v0.24",
   typeof V024_VERSION === "string" ? V024_VERSION : "v0.24",
+  "v0.24+",
+  "v0.25",
   V024_PLUS_VERSION
 ]);
 
@@ -59,7 +61,7 @@ function v024PlusPersist(show = true) {
 
   try {
     storage.setItem(V024_PLUS_SAVE_KEY, payload);
-    if (show) toast("Partida v0.24+ guardada");
+    if (show) toast("Partida v0.26 guardada");
     return true;
   } catch (error) {
     console.warn("v0.24+: localStorage bloqueado o sin espacio", error);
@@ -85,7 +87,7 @@ loadGame = function() {
   }
   raw ||= V024_PLUS_MEMORY_SAVE;
 
-  if (!raw) return toast("No hay guardado v0.24+ disponible");
+  if (!raw) return toast("No hay guardado v0.26 disponible");
 
   try {
     const obj = JSON.parse(raw);

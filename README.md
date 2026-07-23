@@ -1,10 +1,158 @@
-# Cycling Manager Tour v0.24+ · Integración GPX real
+# Cycling Manager Tour v0.26 · Stage Lab + salto de temporada
 
-Esta versión integra los recorridos GPX proporcionados dentro del simulador completo v0.24, conservando el motor de corredores, CP/W′, formaciones, ataques, grupos, nutrición, material, IA rival, telemetría, contratos, staff y temporada.
+Esta versión conserva íntegramente la integración de **Grand Tour Stage Lab** de v0.25 y añade un planificador de calendario para el modo temporada.
 
-## Arranque
+Ahora puedes decidir qué carreras quieres disputar manualmente y cuáles deben simularse automáticamente para avanzar directamente hacia las grandes vueltas, monumentos, Mundial u otros objetivos prioritarios.
 
-No abras `index.html` directamente con `file://`, porque algunos navegadores restringen recursos locales. Ejecuta un servidor estático:
+## Flujo de temporada v0.26
+
+```text
+Modo temporada
+→ seleccionar carreras manuales/automáticas
+→ seleccionar equipo
+→ simulación automática de eventos no prioritarios
+→ Grand Tour Stage Lab en la siguiente carrera manual
+→ selección de 8 corredores
+→ desarrollo normal de la competición
+→ planificador entre carreras
+```
+
+Las pruebas marcadas como **JUGAR** conservan el flujo completo:
+
+```text
+Stage Lab → GPX → perfil Radial → convocatoria → carrera con física a 250 m
+```
+
+Las pruebas marcadas como **AUTO** se resuelven en segundo plano y el calendario continúa automáticamente.
+
+---
+
+## Funciones nuevas v0.26
+
+### Planificador de calendario
+
+En la pantalla inicial del modo temporada aparece un panel con las 36 carreras. Cada evento puede configurarse como:
+
+- **JUGAR:** abre Grand Tour Stage Lab y continúa con la convocatoria y carrera normal.
+- **AUTO:** se simula automáticamente sin abrir Stage Lab ni detener el calendario.
+
+### Presets incluidos
+
+- Todo el calendario.
+- Solo grandes vueltas.
+- Grandes vueltas + monumentos + Mundial.
+- Todas las vueltas por etapas.
+- Selección personalizada.
+- Marcar todas las carreras restantes.
+- Simular todas las carreras restantes.
+
+### Salto directo desde “Entre carreras”
+
+Después de terminar un evento puedes seleccionar cualquier competición futura y pulsar:
+
+```text
+Simular hasta este evento
+```
+
+El juego procesa automáticamente todas las carreras intermedias y abre Grand Tour Stage Lab en el objetivo seleccionado.
+
+### Simular la carrera actual desde Stage Lab
+
+La cabecera de Stage Lab incorpora el botón:
+
+```text
+Simular esta carrera y continuar
+```
+
+Permite cambiar de decisión sin volver al menú inicial.
+
+### Progreso y parada segura
+
+Durante el salto se muestra:
+
+- carrera que se está simulando;
+- objetivo final;
+- carreras completadas;
+- porcentaje de progreso;
+- resultados recientes;
+- botón para detenerse después de la carrera actual.
+
+---
+
+## Modelo de simulación automática
+
+Las carreras omitidas utilizan un **motor deportivo condensado v0.26** diseñado para avanzar el calendario rápidamente sin ejecutar cada kilómetro de forma visual.
+
+El resultado de cada etapa sigue considerando:
+
+- atributos específicos del terreno;
+- rol del corredor;
+- forma y fatiga;
+- CP relativo y W′;
+- durabilidad fisiológica;
+- readiness y objetivos A/B/C;
+- material y neumáticos;
+- clima, pavé y riesgo técnico;
+- CRI y CRE;
+- penalización de sprinters en montaña;
+- agrupamiento y diferencias por tipo de etapa.
+
+También se conservan y actualizan:
+
+- clasificaciones y tiempos acumulados;
+- victorias de etapa y carrera;
+- puntos UCI;
+- fatiga, forma, moral y días de competición;
+- objetivos del sponsor;
+- contratos y promesas;
+- scouting y mentoría;
+- palmarés y récords;
+- entrenamiento entre carreras;
+- historial de temporada.
+
+Las carreras jugadas manualmente siguen utilizando el motor GPX completo de v0.25, con subpasos físicos de **250 m**, CP/W′, grupos, ataques, viento, drafting, nutrición y telemetría.
+
+---
+
+## Grand Tour Stage Lab
+
+Stage Lab sigue conectado a los **36 eventos** del calendario y mantiene:
+
+- generación y edición de recorridos;
+- rutas GPX;
+- enrutado opcional OpenStreetMap/Valhalla;
+- mapa 2D y terreno 3D;
+- perfil interactivo;
+- puertos y sectores;
+- exportación GPX y ZIP;
+- transferencia directa al motor del manager.
+
+La colorimetría Radial se conserva sin cambios:
+
+| Pendiente | Color |
+|---:|---|
+| ≤ −9 % | `#1a4bff` |
+| −9 a −6 % | `#2c7cff` |
+| −6 a −3 % | `#2bb2ff` |
+| −3 a −1 % | `#24c6c6` |
+| −1 a 1,5 % | `#14b81f` |
+| 1,5 a 3 % | `#63cf15` |
+| 3 a 5 % | `#b5c718` |
+| 5 a 7 % | `#e4c625` |
+| 7 a 9 % | `#ee9430` |
+| > 9 % | `#dd5a22` |
+
+---
+
+## Instalación en GitHub Pages
+
+1. Descomprime el ZIP.
+2. Sube **todo el contenido** a la raíz del repositorio.
+3. Mantén intacta la carpeta `stage-lab/`.
+4. Activa GitHub Pages desde la rama principal y la carpeta raíz.
+5. Realiza una recarga forzada después de sustituir la versión anterior.
+
+Ejecución local:
 
 ```bash
 python -m http.server 8080
@@ -16,104 +164,20 @@ Después abre:
 http://localhost:8080
 ```
 
-También puedes subir todos los archivos a la raíz de un repositorio y activar GitHub Pages.
+No se recomienda abrir directamente con `file://` porque el iframe y los mapas pueden quedar restringidos por el navegador.
 
-## Carrera recomendada
+---
 
-En **Carrera única**, selecciona:
-
-```text
-Tour de France 2026 · GPX reales
-```
-
-Esta carrera contiene exclusivamente los 18 GPX disponibles:
+## Archivos principales
 
 ```text
-1, 2, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 y 21
-```
+index.html
+styles.css
+v024.css
+gpx.css
+stage-lab-integration.css
+v026.css
 
-Las etapas 3, 4 y 5 no estaban incluidas en los archivos recibidos y por eso no aparecen en la carrera GPX-only.
-
-El Tour de France original también se conserva para mantener compatibilidad con el juego anterior. En ese evento, 18 etapas usan GPX real y las etapas 3, 4 y 5 mantienen el perfil sintético previo.
-
-## Qué cambia en el motor
-
-### Geometría y altimetría
-
-Cada GPX se procesa con:
-
-- distancia acumulada geodésica;
-- remuestreo cada 20 m;
-- filtro mediano para picos espurios;
-- suavizado de elevación;
-- pendiente calculada en una ventana centrada de 100 m;
-- coordenadas latitud/longitud asociadas a cada muestra.
-
-### Resolución de simulación
-
-El motor v0.24 original trabajaba internamente por kilómetros. En las etapas GPX se ha sustituido por subpasos de:
-
-```text
-250 m
-```
-
-En cada subpaso se mantienen:
-
-- física de potencia y velocidad;
-- CP y W′;
-- drafting y posición en grupo;
-- fatiga, energía e hidratación;
-- neumáticos, rodadura y material;
-- riesgo de caída o pinchazo;
-- formación del grupo;
-- autobús;
-- ataques y respuestas;
-- telemetría.
-
-Los eventos probabilísticos que antes se evaluaban una vez por kilómetro siguen evaluándose una vez por kilómetro para evitar multiplicar artificialmente ataques, abanicos o alertas.
-
-### Viento ligado al recorrido
-
-En etapas GPX, el viento deja de depender solo de una oscilación ficticia. El motor calcula el rumbo local de la carretera y descompone el viento en:
-
-- componente frontal;
-- componente lateral;
-- exposición al abanico.
-
-## Visualización
-
-Cada etapa GPX incluye:
-
-- perfil altimétrico coloreado a alta frecuencia;
-- cursor interactivo;
-- lectura de km recorrido;
-- distancia restante;
-- elevación;
-- pendiente local;
-- navegación con ratón, arrastre, rueda, táctil y teclado;
-- recorrido real proyectado desde latitud/longitud;
-- grupos colocados sobre la ruta;
-- tramo completado destacado;
-- sectores generados a partir del terreno real.
-
-## Colores de pendiente
-
-La escala está inspirada en Radial:
-
-- descenso muy fuerte: azul oscuro;
-- descenso: azul/celeste;
-- falso llano descendente: turquesa;
-- llano: verde;
-- subida suave: verde lima;
-- subida media: amarillo;
-- subida dura: naranja;
-- pendiente extrema: naranja oscuro.
-
-## Orden de carga de scripts
-
-El orden de `index.html` es importante:
-
-```text
 data.js
 v024-data.js
 gpx-stage-data.js
@@ -122,63 +186,28 @@ game.js
 v024-expansion.js
 gpx-integration.js
 v024-plus-fix.js
+stage-lab-integration.js
+v026-season-skip.js
+
+stage-lab/
 ```
 
-- `gpx-stage-data.js` contiene los datos procesados.
-- `gpx-engine.js` modifica las etapas antes de iniciar el juego.
-- `gpx-integration.js` conecta el GPX con la física y la interfaz después de cargar v0.24.
-- `v024-plus-fix.js` corrige la confirmación de ocho corredores y protege el flujo frente a fallos de almacenamiento.
+`v026-season-skip.js` debe cargarse el último, ya que amplía los flujos de inicio, calendario, Stage Lab, pantalla entre carreras, guardado y final de temporada.
 
-## Archivos nuevos
+---
+
+## Guardado y compatibilidad
+
+La versión declarada es:
 
 ```text
-gpx-stage-data.js
-gpx-engine.js
-gpx-integration.js
-gpx.css
-v024-plus-fix.js
-gpx/
-tools/build_stage_data.py
-tools/rebuild_gpx_data.py
+v0.26
 ```
 
-## Añadir más etapas GPX
-
-1. Copia el archivo en `gpx/`.
-2. Usa el nombre:
-
-```text
-stage-3-parcours.gpx
-```
-
-3. Ejecuta:
-
-```bash
-python tools/rebuild_gpx_data.py
-```
-
-4. Recarga el navegador borrando caché.
-
-El script regenerará `gpx-stage-data.js`.
-
-## Guardado
-
-Se mantiene la clave de guardado de v0.24:
+Se mantiene la clave histórica:
 
 ```text
 cyclingManager_v024
 ```
 
-Para una primera prueba de esta integración, se recomienda pulsar **Borrar guardado** y empezar una nueva partida, evitando estados antiguos asociados a distancias o sectores diferentes.
-
-## Limitaciones actuales
-
-- El mapa es una proyección autónoma de la geometría real, sin teselas externas.
-- No se han añadido carreteras, poblaciones ni cartografía base.
-- Los puntos de sprint, puertos oficiales y nombres geográficos no vienen identificados en los GPX suministrados; las ascensiones y sectores se detectan automáticamente.
-- Las etapas 3, 4 y 5 necesitan sus GPX para completar el Tour real de 21 etapas.
-
-
-## Hotfix v0.24+
-
-La confirmación de los ocho corredores es transaccional y no depende de que `localStorage` funcione. Carrera única y temporada avanzan a la pantalla de carrera incluso cuando el navegador bloquea el almacenamiento local.
+El cargador acepta partidas de v0.24, v0.24+, v0.25 y v0.26. Para una prueba completamente limpia se recomienda pulsar **Borrar guardado** al sustituir la versión anterior.
