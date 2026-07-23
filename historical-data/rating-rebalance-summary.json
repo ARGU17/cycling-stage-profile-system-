@@ -1,0 +1,12 @@
+{
+  "riders": 6126,
+  "duplicatesRemoved": 0,
+  "byBaseBand": {
+    "90-94": 2323,
+    "85-89": 2504,
+    "80-84": 706,
+    "95-99": 521,
+    "75-79": 72
+  },
+  "scope": "Historical packs 1990-2025; 2026 uses the restored v0.24 simulator ratings without rebalancing."
+}

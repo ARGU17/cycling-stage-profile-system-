@@ -1,0 +1,18 @@
+{
+  "teamsAdded": 0,
+  "ridersAdded": 0,
+  "starsUpgraded": 0,
+  "baseRecomputed": 6126,
+  "details": [],
+  "v026Restored2026": {
+    "teams": 34,
+    "riders": 927,
+    "races": 36,
+    "status": "complete-simulator-v024"
+  },
+  "totalArchive": {
+    "years": 37,
+    "teams": 806,
+    "riders": 7053
+  }
+}

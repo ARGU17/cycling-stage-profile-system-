@@ -1,0 +1,266 @@
+{
+  "schemaVersion": 4,
+  "generatedAt": "2026-07-22",
+  "scope": "UCI WorldTeams (2005-2026) and Tour-level elite equivalents (1990-2004)",
+  "years": [
+    {
+      "year": 1990,
+      "status": "included-tour-elite-archive",
+      "teamCount": 22,
+      "riderCount": 166,
+      "file": "1990.json"
+    },
+    {
+      "year": 1991,
+      "status": "included-tour-elite-archive",
+      "teamCount": 21,
+      "riderCount": 167,
+      "file": "1991.json"
+    },
+    {
+      "year": 1992,
+      "status": "included-tour-elite-archive",
+      "teamCount": 22,
+      "riderCount": 169,
+      "file": "1992.json"
+    },
+    {
+      "year": 1993,
+      "status": "included-tour-elite-archive",
+      "teamCount": 20,
+      "riderCount": 152,
+      "file": "1993.json"
+    },
+    {
+      "year": 1994,
+      "status": "included-tour-elite-archive",
+      "teamCount": 19,
+      "riderCount": 153,
+      "file": "1994.json"
+    },
+    {
+      "year": 1995,
+      "status": "included-tour-elite-archive",
+      "teamCount": 21,
+      "riderCount": 154,
+      "file": "1995.json"
+    },
+    {
+      "year": 1996,
+      "status": "included-tour-elite-archive",
+      "teamCount": 22,
+      "riderCount": 157,
+      "file": "1996.json"
+    },
+    {
+      "year": 1997,
+      "status": "included-tour-elite-archive",
+      "teamCount": 22,
+      "riderCount": 166,
+      "file": "1997.json"
+    },
+    {
+      "year": 1998,
+      "status": "included-tour-elite-archive",
+      "teamCount": 19,
+      "riderCount": 151,
+      "file": "1998.json"
+    },
+    {
+      "year": 1999,
+      "status": "included-tour-elite-archive",
+      "teamCount": 20,
+      "riderCount": 161,
+      "file": "1999.json"
+    },
+    {
+      "year": 2000,
+      "status": "included-tour-elite-archive",
+      "teamCount": 20,
+      "riderCount": 151,
+      "file": "2000.json"
+    },
+    {
+      "year": 2001,
+      "status": "included-tour-elite-archive",
+      "teamCount": 21,
+      "riderCount": 170,
+      "file": "2001.json"
+    },
+    {
+      "year": 2002,
+      "status": "included-tour-elite-archive",
+      "teamCount": 21,
+      "riderCount": 170,
+      "file": "2002.json"
+    },
+    {
+      "year": 2003,
+      "status": "included-tour-elite-archive",
+      "teamCount": 22,
+      "riderCount": 175,
+      "file": "2003.json"
+    },
+    {
+      "year": 2004,
+      "status": "included-tour-elite-archive",
+      "teamCount": 21,
+      "riderCount": 166,
+      "file": "2004.json"
+    },
+    {
+      "year": 2005,
+      "status": "included-tour-elite-archive",
+      "teamCount": 21,
+      "riderCount": 172,
+      "file": "2005.json"
+    },
+    {
+      "year": 2006,
+      "status": "included-tour-elite-archive",
+      "teamCount": 21,
+      "riderCount": 168,
+      "file": "2006.json"
+    },
+    {
+      "year": 2007,
+      "status": "included-tour-elite-archive",
+      "teamCount": 22,
+      "riderCount": 177,
+      "file": "2007.json"
+    },
+    {
+      "year": 2008,
+      "status": "included-tour-elite-archive",
+      "teamCount": 21,
+      "riderCount": 171,
+      "file": "2008.json"
+    },
+    {
+      "year": 2009,
+      "status": "included-tour-elite-archive",
+      "teamCount": 20,
+      "riderCount": 163,
+      "file": "2009.json"
+    },
+    {
+      "year": 2010,
+      "status": "included-tour-elite-archive",
+      "teamCount": 22,
+      "riderCount": 178,
+      "file": "2010.json"
+    },
+    {
+      "year": 2011,
+      "status": "included-tour-elite-archive",
+      "teamCount": 22,
+      "riderCount": 183,
+      "file": "2011.json"
+    },
+    {
+      "year": 2012,
+      "status": "included-tour-elite-archive",
+      "teamCount": 22,
+      "riderCount": 178,
+      "file": "2012.json"
+    },
+    {
+      "year": 2013,
+      "status": "included-tour-elite-archive",
+      "teamCount": 22,
+      "riderCount": 182,
+      "file": "2013.json"
+    },
+    {
+      "year": 2014,
+      "status": "included-tour-elite-archive",
+      "teamCount": 22,
+      "riderCount": 180,
+      "file": "2014.json"
+    },
+    {
+      "year": 2015,
+      "status": "included-tour-elite-archive",
+      "teamCount": 22,
+      "riderCount": 178,
+      "file": "2015.json"
+    },
+    {
+      "year": 2016,
+      "status": "included-tour-elite-archive",
+      "teamCount": 22,
+      "riderCount": 182,
+      "file": "2016.json"
+    },
+    {
+      "year": 2017,
+      "status": "included-tour-elite-archive",
+      "teamCount": 22,
+      "riderCount": 183,
+      "file": "2017.json"
+    },
+    {
+      "year": 2018,
+      "status": "included-tour-elite-archive",
+      "teamCount": 22,
+      "riderCount": 176,
+      "file": "2018.json"
+    },
+    {
+      "year": 2019,
+      "status": "included-tour-elite-archive",
+      "teamCount": 22,
+      "riderCount": 175,
+      "file": "2019.json"
+    },
+    {
+      "year": 2020,
+      "status": "included-tour-elite-archive",
+      "teamCount": 22,
+      "riderCount": 170,
+      "file": "2020.json"
+    },
+    {
+      "year": 2021,
+      "status": "included-tour-elite-archive",
+      "teamCount": 23,
+      "riderCount": 178,
+      "file": "2021.json"
+    },
+    {
+      "year": 2022,
+      "status": "included-tour-elite-archive",
+      "teamCount": 22,
+      "riderCount": 172,
+      "file": "2022.json"
+    },
+    {
+      "year": 2023,
+      "status": "included-tour-elite-archive",
+      "teamCount": 22,
+      "riderCount": 175,
+      "file": "2023.json"
+    },
+    {
+      "year": 2024,
+      "status": "included-tour-elite-archive",
+      "teamCount": 22,
+      "riderCount": 175,
+      "file": "2024.json"
+    },
+    {
+      "year": 2025,
+      "status": "included-tour-elite-archive",
+      "teamCount": 23,
+      "riderCount": 182,
+      "file": "2025.json"
+    },
+    {
+      "year": 2026,
+      "status": "complete-simulator-v024",
+      "teamCount": 34,
+      "riderCount": 927,
+      "file": "2026.json"
+    }
+  ]
+}
